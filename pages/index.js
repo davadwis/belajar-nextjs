@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
+import Content from '@/components/content';
 
 const Home = ({ metaTitle, metaDescription })  => {
   return (
@@ -15,7 +16,7 @@ const Home = ({ metaTitle, metaDescription })  => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <div>Ini Body</div>
+      <Content />
       <Footer />
     </>
   )
