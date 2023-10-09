@@ -3,7 +3,10 @@ import Layout from "@/layout";
 const Profile = ({ children }) => {
   return(
     <>
-     <Layout>
+     <Layout
+     metaTitle="Profile"
+     metaDescription="All Information About Profile"
+     >
      <div className="w-full h-screen m-auto grid">
         <div className="grid content-center justify-items-center p-4 font-light text-2xl">
           Ini adalah Profile

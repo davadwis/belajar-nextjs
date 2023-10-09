@@ -4,7 +4,9 @@ import Layout from '@/layout';
 const Home = ({ children })  => {
   return (
     <>
-      <Layout>
+      <Layout
+      metaTitle="Home"
+      >
         <Content />
       </Layout>
     </>
