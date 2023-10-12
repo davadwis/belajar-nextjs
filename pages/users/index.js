@@ -1,7 +1,25 @@
 import Layout from "@/layout";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const Users = () => {
+
+
+  useEffect((res) => {
+    
+    fetch("/api/hello")
+    .then((res) => 
+      res.json()
+    )
+    .then((res) => 
+      console.log("response: ", res)
+    )
+    .catch((err) => 
+      console.log("error: ", err)
+    )
+
+  }, [])
+
   return(
     <>
       <Layout
