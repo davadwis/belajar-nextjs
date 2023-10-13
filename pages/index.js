@@ -1,14 +1,18 @@
 import Content from '@/components/content';
-import Layout from '@/layout';
+import dynamic from 'next/dynamic';
+
+const DynamicLayout = dynamic(() => import('@/layout'), {
+  loading: () => <p>Loading...</p>,
+})
 
 const Home = ({ children })  => {
   return (
     <>
-      <Layout
+      <DynamicLayout
       metaTitle="Home"
       >
         <Content />
-      </Layout>
+      </DynamicLayout>
     </>
   )
 }
