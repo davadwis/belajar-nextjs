@@ -16,6 +16,12 @@ const Header = () => {
                         <li>
                             <Link href="/profile" className="font-light block rounded md:hover:bg-transparent md:hover:text-primary md:p-0 hover:text-sky-500">Profile</Link>
                         </li>
+                        <li>
+                            <Link href="/posts" className="font-light block rounded md:hover:bg-transparent md:hover:text-primary md:p-0 hover:text-sky-500">Posts</Link>
+                        </li>
+                        <li>
+                            <Link href="/notes" className="font-light block rounded md:hover:bg-transparent md:hover:text-primary md:p-0 hover:text-sky-500">Notes</Link>
+                        </li>
                     </ul>
                 </div>
             </div>
