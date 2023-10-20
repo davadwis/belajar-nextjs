@@ -1,32 +1,33 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useQueries } from "@/hooks/useQueries";
+import fetcher from "@/utils/fetcher";
+import useSWR from "swr";
+import { useMutation } from "@/hooks/useMutation";
 
 const DynamicLayout = dynamic(() => import("@/layout"), {
   loading: () => <p>Loading...</p>,
 });
 
 const Notes = () => {
-  const { data, isLoading } = useQueries({
-    prefixUrl: "https://paace-f178cafcae7b.nevacloud.io/api/notes",
-  });
+  const { data, isLoading } = useSWR(
+    "https://paace-f178cafcae7b.nevacloud.io/api/notes",
+    fetcher,
+    { revalidateOnFocus: true }
+  );
+
+  const { mutate } = useMutation();
 
   const router = useRouter();
 
   const handleDelete = async (id) => {
-    try {
-      const response = await fetch(
-        `https://paace-f178cafcae7b.nevacloud.io/api/notes/delete/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
-      const result = await response.json();
-      if (result?.success) {
-        router.reload();
-      }
-    } catch (error) {}
+    const response = await mutate({
+      url: `https://paace-f178cafcae7b.nevacloud.io/api/notes/delete/${id}`,
+      method: "DELETE",
+    });
+    if (response?.success) {
+      router.reload();
+    }
   };
 
   return (

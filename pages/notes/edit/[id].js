@@ -1,7 +1,9 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "@/hooks/useMutation";
+import fetcher from "@/utils/fetcher";
+import useSWR from "swr";
 
 const DynamicLayout = dynamic(() => import("@/layout"), {
   loading: () => <p>Loading...</p>,
@@ -16,6 +18,20 @@ const EditNotes = () => {
     description: "",
   });
 
+  const { data } = useSWR(
+    `https://paace-f178cafcae7b.nevacloud.io/api/notes/${id}`,
+    fetcher
+  );
+
+  useEffect(() => {
+    if (data) {
+      setNotes({
+        title: data?.data?.title,
+        description: data?.data?.description,
+      });
+    }
+  }, [data]);
+
   const HandleSubmit = async () => {
     const response = await mutate({
       url: `https://paace-f178cafcae7b.nevacloud.io/api/notes/update/${id}`,
@@ -23,7 +39,7 @@ const EditNotes = () => {
       payload: notes,
     });
     if (response?.success) {
-      router.push("/notes");
+      router.back();
     }
   };
 
@@ -50,6 +66,7 @@ const EditNotes = () => {
                   type="text"
                   name="title"
                   id="title"
+                  value={notes?.title}
                   onChange={(event) =>
                     setNotes({ ...notes, title: event.target.value })
                   }
@@ -67,6 +84,7 @@ const EditNotes = () => {
                   type="text"
                   name="description"
                   id="description"
+                  value={notes?.description}
                   onChange={(event) =>
                     setNotes({ ...notes, description: event.target.value })
                   }
