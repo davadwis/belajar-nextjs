@@ -7,8 +7,8 @@ const Content = () => {
   return (
     <>
       <div className="w-full m-auto ">
-        <div className="grid p-4 font-light text-2xl w-1/2 m-auto place-content-center text-center justify-items-center pt-36">
-          <h1 className="font-semibold text-4xl text-gray-200">
+        <div className="grid p-4 font-light text-2xl w-1/2 m-auto place-content-center text-center justify-items-center pt-36 mb-20">
+          <h1 className="font-semibold text-4xl text-gray-800">
             Tingkatkan produktivitasmu dengan Notes, tempat terbaik untuk
             mencatat ide dan memanage tugas harian
           </h1>
