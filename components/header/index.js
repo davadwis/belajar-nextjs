@@ -6,15 +6,19 @@ import { useQueries } from "@/hooks/useQueries";
 import Cookies from "js-cookie";
 import { useMutation } from "@/hooks/useMutation";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { UserContext } from "@/context/userContext";
 
 const Header = () => {
   const router = useRouter();
-  const { data } = useQueries({
-    prefixUrl: "https://paace-f178cafcae7b.nevacloud.io/api/user/me",
-    headers: {
-      Authorization: `Bearer ${Cookies.get("user_token")}`,
-    },
-  });
+  // const { data } = useQueries({
+  //   prefixUrl: "https://paace-f178cafcae7b.nevacloud.io/api/user/me",
+  //   headers: {
+  //     Authorization: `Bearer ${Cookies.get("user_token")}`,
+  //   },
+  // });
+
+  const userData = useContext(UserContext);
 
   const { mutate } = useMutation();
 
@@ -33,8 +37,6 @@ const Header = () => {
       router.push("/login");
     }
   };
-
-  console.log(data);
   return (
     <>
       <nav className="border fixed z-20 w-full top-0 shadow-xl shadow-sky-500/50 border-transparent backdrop-blur-sm">
@@ -61,11 +63,11 @@ const Header = () => {
                 </Link>
               </li>
               <li className="font-light">
-                <Dropdown label={data?.data?.name} inline>
+                <Dropdown label={userData?.name} inline>
                   <Dropdown.Header>
-                    <span className="block text-sm">{data?.data?.name}</span>
+                    <span className="block text-sm">{userData?.name}</span>
                     <span className="block truncate text-sm font-medium">
-                      {data?.data?.email}
+                      {userData?.email}
                     </span>
                   </Dropdown.Header>
                   <Dropdown.Item icon={HiLogout} onClick={() => HandleLogout()}>
